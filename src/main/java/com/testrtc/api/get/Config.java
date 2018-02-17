@@ -1,19 +1,16 @@
-package status;
+package com.testrtc.api.get;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by Martin Keprta on 2/17/2018.
-
-
- "queueStatus": "string",
- "queueCount": 0,
- "dbStatus": "string",
- "dbCount": 0,
- "status": "string"
- }
- *
  */
+@Getter
+@Setter
+@ToString
 public class Config {
     private String version;
     private String agentVersion;
@@ -31,10 +28,4 @@ public class Config {
         this.systemName =systemName;
         this.instanceName =instanceName;
     }
-
-    @Override
-    public String toString(){
-        return null;
-    }
-
 }

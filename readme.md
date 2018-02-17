@@ -31,8 +31,8 @@ gradle test allureReport
 
 ## Built With
 * [Allure](http://allure.qatools.ru/) - An open-source framework designed to create test execution reports that are clear to everyone in the team.
-* [TestRTC](http://testrtc.com) - TestRTC is a testing, monitoring and analytics platform designed and built for the new generation of WebRTC-based communications. testRTC enables you to improve the user experience of your service pre-launch as well as in production.
-* [TestRTC Api](https://apidoc.testrtc.com/index.html#!/default/) - TestRTC Api documentation
+* [TestRTC](http://com.testrtc.com) - TestRTC is a testing, monitoring and analytics platform designed and built for the new generation of WebRTC-based communications. testRTC enables you to improve the user experience of your service pre-launch as well as in production.
+* [TestRTC Api](https://apidoc.com.testrtc.com/index.html#!/default/) - TestRTC Api documentation
 * [Gradle](https://gradle.org/) - Build and Dependency Management
 
 
