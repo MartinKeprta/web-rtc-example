@@ -1,4 +1,4 @@
-# Project Title
+# TestRTC's API for WebRTC service example project
 
 
 TestRTC's API for WebRTC service monitoring and testing automation.
