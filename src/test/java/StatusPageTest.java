@@ -1,9 +1,11 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import status.Status;
 
 import java.net.HttpURLConnection;
 
@@ -22,36 +24,47 @@ public class StatusPageTest extends WebRtcApi {
     }
 
     @Test
-    @Description("Check service status with correct API key.Expected HTTP response is 200")
+    @Description("Get service status as JSON object")
     @Severity(SeverityLevel.NORMAL)
     @Feature("API")
-    public void getServiceStatus(){
+    public void getServiceStatusJSON(){
+
+       Status status;
+
         try {
-            HttpResponse response = Unirest.get(endPoint)
-                        .header("apikey",key)
-                        .asString();
+            HttpResponse<Status> response = Unirest.get(endPoint)
+                        .header("apikey",key).asObject(Status.class);
 
             Assert.assertEquals(response,HttpURLConnection.HTTP_ACCEPTED);
+
+            status = response.getBody();
+
+            Assert.assertNotEquals(status,null);
 
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
+
+            //
     }
 
     @Test
-    @Description("Check service status with incorrect API.Expected HTTP response is 401")
+    @Description("Check service status as raw HTTP response")
     @Severity(SeverityLevel.NORMAL)
     @Feature("API")
-    public void getServiceStatusInvalidApiKey(){
+    public void getServiceStatusHTTP(){
         try {
             HttpResponse response = Unirest.get(endPoint)
-                    .header("apikey","incorrect value")
+                    .header("apikey",key)
                     .asString();
 
-            Assert.assertEquals(response,HttpURLConnection.HTTP_UNAUTHORIZED);
+            Assert.assertEquals(response,HttpURLConnection.HTTP_ACCEPTED);
+
 
         } catch (UnirestException e) {
             e.printStackTrace();
         }
+
+
     }
 }
