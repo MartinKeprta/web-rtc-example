@@ -36,9 +36,6 @@ public class StatusPageTest extends WebRtcApi {
             } catch (UnirestException e) {
                 e.printStackTrace();
             }
-
-
-
     }
 
     @Test
