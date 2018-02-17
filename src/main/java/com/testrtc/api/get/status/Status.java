@@ -29,7 +29,7 @@ public class Status {
             @JsonProperty("queueCount") String queueCount,
             @JsonProperty("dbStatus") String dbStatus,
             @JsonProperty("dbCount") String dbCount,
-            @JsonProperty("com/testrtc") String status
+            @JsonProperty("status") String status
     ){
         this.role=role;
         this.config=config;
