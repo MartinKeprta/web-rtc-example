@@ -1,4 +1,4 @@
-package com.testrtc.api.get;
+package com.testrtc.api.get.status;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

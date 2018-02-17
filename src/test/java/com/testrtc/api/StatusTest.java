@@ -1,7 +1,9 @@
+package com.testrtc.api;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.testrtc.api.get.Status;
+import com.testrtc.api.get.status.Status;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -18,7 +20,7 @@ import java.net.HttpURLConnection;
 /**
  * Created by Martin Keprta on 2/17/2018.
  */
-public class StatusPageTest extends WebRtcApi {
+public class StatusTest extends WebRtcApi {
 
     private String endPoint;
 
@@ -38,7 +40,7 @@ public class StatusPageTest extends WebRtcApi {
 
         try {
             HttpResponse<Status> response = Unirest.get(endPoint)
-                        .header("apikey",key).asObject(Status.class);
+                    .header("apikey", key).asObject(Status.class);
 
             Assert.assertEquals(response.getStatus(), HttpURLConnection.HTTP_OK);
 
@@ -46,9 +48,9 @@ public class StatusPageTest extends WebRtcApi {
             System.out.println(status.toString());
 
 
-            } catch (UnirestException e) {
-                e.printStackTrace();
-            }
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
 
     }
 
