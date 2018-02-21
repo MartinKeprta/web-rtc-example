@@ -5,9 +5,6 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -20,13 +17,13 @@ import java.util.Set;
 /**
  * Created by Martin Keprta on 2/21/2018.
  */
-public class TestRun extends WebRtcApi {
+public class TestInfo extends WebRtcApi {
 
     //Setting endpoint to required value
     @BeforeMethod
     @Parameters({"service"})
     @Description("Setting endpoint to correct value , if no value is present default is used")
-    public void setEndPoint(@Optional("tests/{testId}/run") String service) {
+    public void setEndPoint(@Optional("tests/{testId}") String service) {
         endPoint = url + service;
         System.out.println("Base url for this case is :[" + endPoint + "]");
     }
@@ -40,19 +37,17 @@ public class TestRun extends WebRtcApi {
         return testList.iterator();
     }
 
-    //Takes data from provider and launches test
+    //Retrieves information about test and return Json object with it
     @Test(dataProvider = "testList")
-    @Description("Execute tests by providing test ids in parameter")
-    @Severity(SeverityLevel.NORMAL)
-    @Feature("API")
-    public void runTests(String testId) throws UnirestException {
+    public void getTestInformation(String testId) throws UnirestException {
         //Execute request
-        HttpResponse<JsonNode> response = Unirest.post(endPoint).routeParam("testId", testId).asJson();
+        HttpResponse<JsonNode> response = Unirest.get(endPoint).routeParam("testId", testId).asJson();
         //Write output to console
         System.out.println(response.getBody().toString());
         //Check response is correct.Expected 200
         Assert.assertEquals(response.getStatus(), HttpURLConnection.HTTP_OK);
-    }
 
+
+    }
 
 }

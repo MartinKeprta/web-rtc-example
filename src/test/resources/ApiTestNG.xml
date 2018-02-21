@@ -8,9 +8,21 @@
         </classes>
     </test>
 
-    <test name="Execution">
+    <test name="Launch tests">
         <classes>
             <class name="com.testrtc.api.TestRun"/>
+        </classes>
+    </test>
+
+    <test name="Test information">
+        <classes>
+            <class name="com.testrtc.api.TestInfo"/>
+        </classes>
+    </test>
+
+    <test name="Test result">
+        <classes>
+            <class name="com.testrtc.api.TestResult"/>
         </classes>
     </test>
 
