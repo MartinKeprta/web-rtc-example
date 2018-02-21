@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Api tests">
+    <test name="Status">
+        <classes>
+            <class name="com.testrtc.api.StatusTest"/>
+        </classes>
+    </test>
+
+    <test name="Execution">
+        <classes>
+            <class name="com.testrtc.api.TestRun"/>
+        </classes>
+    </test>
+
+
+</suite>

@@ -57,6 +57,7 @@ allure {
 
 
 test {
-    useTestNG()
+    useTestNG(){
+        suites 'src/test/resources/ApiTestNG.xml'
+    }
 }
-

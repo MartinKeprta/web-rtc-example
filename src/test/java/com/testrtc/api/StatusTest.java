@@ -9,7 +9,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -22,12 +22,11 @@ import java.net.HttpURLConnection;
  */
 public class StatusTest extends WebRtcApi {
 
-    private String endPoint;
 
-    @BeforeClass
+    @BeforeMethod
     @Parameters({"service"})
     @Description("Setting endpoint to correct value , if no value is present default is used")
-    public void setEndPoint(@Optional("com.testrtc-page") String service) {
+    public void setEndPoint(@Optional("status-page") String service) {
         this.endPoint = url + service;
         System.out.println("Base url for this case is :[" + endPoint + "]");
     }
@@ -40,7 +39,7 @@ public class StatusTest extends WebRtcApi {
 
         try {
             HttpResponse<Status> response = Unirest.get(endPoint)
-                    .header("apikey", key).asObject(Status.class);
+                    .asObject(Status.class);
 
             Assert.assertEquals(response.getStatus(), HttpURLConnection.HTTP_OK);
 
@@ -61,7 +60,7 @@ public class StatusTest extends WebRtcApi {
     public void getServiceStatusHTTP(){
         try {
             HttpResponse response = Unirest.get(endPoint)
-                    .header("apikey", key).asJson();
+                    .asJson();
 
             Assert.assertEquals(response.getStatus(), HttpURLConnection.HTTP_OK);
 

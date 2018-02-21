@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
@@ -20,16 +20,19 @@ import java.io.IOException;
 
 
 public class WebRtcApi {
-    protected String url;
-    protected String key;
+    public String url;
+    public String key;
+    public String endPoint;
 
 
-    @BeforeSuite
+    @BeforeClass
     @Parameters({"url","key"})
-    public void test1(@Optional("https://api.com.testrtc.com/v1/") String url, @Optional("9d578682-bc24-446f-905c-8d4061be8900") String key) {
-        this.key = key;
+    public void test1(@Optional("https://api.testrtc.com/v1/") String url, @Optional("9d578682-bc24-446f-905c-8d4061be8900") String key) {
+
         this.url = url;
 
+        Unirest.setDefaultHeader("apikey", key);
+        Unirest.setDefaultHeader("Content-Type", "application/json");
         Unirest.setObjectMapper(new com.mashape.unirest.http.ObjectMapper() {
 
             private ObjectMapper mapper = new ObjectMapper();
