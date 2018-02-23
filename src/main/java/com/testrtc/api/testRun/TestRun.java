@@ -4,6 +4,7 @@ package com.testrtc.api.testRun;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
         "agents",
         "url"
 })
+@ToString
 public class TestRun {
 
     @JsonProperty("concurrentUsers")
