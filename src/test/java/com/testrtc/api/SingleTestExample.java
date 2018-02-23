@@ -24,7 +24,10 @@ public class SingleTestExample {
         TestRun testResult = WebRtcApiConnector.launchTest("5a82eae077a5940011f64ed6");
 
         if (!testResult.status.equals("completed")) {
+            System.out.println(testResult.toString());
             Assert.fail("Test failed. For more information visit:" + testResult.url);
+        } else {
+            System.out.println(testResult.toString());
         }
 
     }
@@ -35,7 +38,10 @@ public class SingleTestExample {
         TestRun testResult = WebRtcApiConnector.launchTest("5a85dcf571aaec00113f091f");
 
         if (!testResult.status.equals("completed")) {
+            System.out.println(testResult.toString());
             Assert.fail("Test failed. For more information visit:" + testResult.url);
+        } else {
+            System.out.println(testResult.toString());
         }
     }
 
