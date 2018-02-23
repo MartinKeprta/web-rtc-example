@@ -3,9 +3,15 @@
 
 <suite name="Test-method Suite">
 
-    <test name="Run tests">
+    <test name="Run tests single">
         <classes>
-            <class name="com.testrtc.api.ApiTest"/>
+            <class name="com.testrtc.api.SingleTestExample"/>
+        </classes>
+    </test>
+
+    <test name="Run tests parametrized">
+        <classes>
+            <class name="com.testrtc.api.ParametrizedTestExample"/>
         </classes>
     </test>
 </suite>

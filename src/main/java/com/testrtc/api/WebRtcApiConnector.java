@@ -12,6 +12,7 @@ import com.testrtc.api.testRunId.TestRunId;
 import io.qameta.allure.Step;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 /**
  * Created by Martin Keprta on 2/21/2018.
@@ -26,9 +27,10 @@ public final class WebRtcApiConnector {
     //Create API object + sets up constructor
     @Step("Setting credentials")
     public static void setCredentials(String key, String url) {
-        //TODO : Post request which will verify if API is correctly setted up
-        apiKey = key;
         baseUrl = url;
+        //TODO : Post request which will verify if API is correctly setted up
+        apiKey = validateApiKey(key);
+        //apiKey=key;
         Unirest.setDefaultHeader("apikey", apiKey);
         Unirest.setDefaultHeader("Content-Type", "application/json");
         Unirest.setObjectMapper(new com.mashape.unirest.http.ObjectMapper() {
@@ -64,7 +66,7 @@ public final class WebRtcApiConnector {
     }
 
     @Step("Launched test")
-    public static Boolean launchTest(String testId) throws InterruptedException {
+    public static TestRun launchTest(String testId) throws InterruptedException {
         String testRunId = executeTest(testId).getBody().getTestRunId();
         Boolean testFinished = false;
 
@@ -95,7 +97,7 @@ public final class WebRtcApiConnector {
         }
 
 
-        return true;
+        return getTestStatus(testRunId);
     }
 
     @Step("Asking for test status")
@@ -132,6 +134,25 @@ public final class WebRtcApiConnector {
         System.out.println("Success:Test run id" + response.getBody().getTestRunId());
         return response;
 
+    }
+
+    @Step("Validate user API key")
+    private static String validateApiKey(String apiKey) {
+        try {
+            HttpResponse<String> status = Unirest.get(baseUrl + "status-page").header("apikey", apiKey).header("Content-Type", "application/json").asString();
+
+            if (status.getStatus() != HttpURLConnection.HTTP_OK) {
+                new RuntimeException("API cannot be verified!");
+            } else {
+                System.out.println("API key: " + apiKey + " verified");
+                return apiKey;
+            }
+
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
