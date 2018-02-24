@@ -19,8 +19,8 @@ import java.net.HttpURLConnection;
  * Created by Martin Keprta on 2/21/2018.
  */
 public final class WebRtcApiConnector {
-    private static String baseUrl;
-    private static String apiKey;
+    private static String baseUrl = null;
+    private static String apiKey = null;
 
     private WebRtcApiConnector() {
     }
@@ -28,9 +28,8 @@ public final class WebRtcApiConnector {
     //Create API object + sets up constructor
     @Step("Setting credentials")
     public static void setCredentials(String key, String url) {
-        baseUrl = url;
-        //TODO : Post request which will verify if API is correctly setted up
-        apiKey = validateApiKey(key);
+        if (baseUrl == null) baseUrl = url;
+        if (apiKey == null) apiKey = validateApiKey(key);
         //apiKey=key;
         Unirest.setDefaultHeader("apikey", apiKey);
         Unirest.setDefaultHeader("Content-Type", "application/json");
@@ -68,10 +67,13 @@ public final class WebRtcApiConnector {
 
     @Step("Launched test")
     public static TestRun launchTest(String testId) throws InterruptedException {
+
+        //validateApiKey(apiKey);
+
         String testRunId = executeTest(testId).getBody().getTestRunId();
         Boolean testFinished = false;
 
-        TestRun testRun;
+
 
 
         while (testFinished == false) {
@@ -143,7 +145,7 @@ public final class WebRtcApiConnector {
             HttpResponse<String> status = Unirest.get(baseUrl + "status-page").header("apikey", apiKey).header("Content-Type", "application/json").asString();
 
             if (status.getStatus() != HttpURLConnection.HTTP_OK) {
-                new RuntimeException("API cannot be verified!");
+                new RuntimeException("Invalid credentials!");
             } else {
                 System.out.println("API key: " + apiKey + " verified");
                 return apiKey;

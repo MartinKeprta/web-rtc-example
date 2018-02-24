@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.HashSet;
@@ -21,8 +22,8 @@ public class ParametrizedTestExample {
     @DataProvider(name = "testRunList")
     public Iterator<Object[]> testList() {
         Set<Object[]> testList = new HashSet<Object[]>();
+        testList.add(new Object[]{"5a82deb32ea77e0011ff5dc9"});
         testList.add(new Object[]{"5a85dcf571aaec00113f091f"});
-        testList.add(new Object[]{"5a82eae077a5940011f64ed6"});
         return testList.iterator();
     }
 
@@ -32,24 +33,11 @@ public class ParametrizedTestExample {
     }
 
 
-    @Test(groups = "waitr")
-    @Description("Waitr sample test")
-    public void Waitr() throws InterruptedException {
-        TestRun testResult = WebRtcApiConnector.launchTest("5a82eae077a5940011f64ed6");
-
-        if (!testResult.status.equals("completed")) {
-            System.out.println(testResult.toString());
-            Assert.fail("Test failed. For more information visit:" + testResult.url);
-        } else {
-            System.out.println(testResult.toString());
-        }
-
-    }
-
-    @Test(groups = "twillio")
+    @Test(groups = "twillio", dataProvider = "testRunList")
     @Description("Twillio phone test")
-    public void Twillio() throws InterruptedException {
-        TestRun testResult = WebRtcApiConnector.launchTest("5a85dcf571aaec00113f091f");
+    @Parameters("testId")
+    public void Twillio(String testId) throws InterruptedException {
+        TestRun testResult = WebRtcApiConnector.launchTest(testId);
 
         if (!testResult.status.equals("completed")) {
             System.out.println(testResult.toString());

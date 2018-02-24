@@ -17,11 +17,10 @@ public class SingleTestExample {
         WebRtcApiConnector.setCredentials("9d578682-bc24-446f-905c-8d4061be8900", "https://api.testrtc.com/v1/");
     }
 
-
-    @Test(groups = "waitr")
-    @Description("Waitr sample test")
+    @Test
+    @Description("Twillio video test")
     public void Waitr() throws InterruptedException {
-        TestRun testResult = WebRtcApiConnector.launchTest("5a82eae077a5940011f64ed6");
+        TestRun testResult = WebRtcApiConnector.launchTest("5a85dcf571aaec00113f091f");
 
         if (!testResult.status.equals("completed")) {
             System.out.println(testResult.toString());
@@ -32,10 +31,10 @@ public class SingleTestExample {
 
     }
 
-    @Test(groups = "twillio")
-    @Description("Twillio phone test")
+    @Test
+    @Description("Twillio video test")
     public void Twillio() throws InterruptedException {
-        TestRun testResult = WebRtcApiConnector.launchTest("5a85dcf571aaec00113f091f");
+        TestRun testResult = WebRtcApiConnector.launchTest("5a82deb32ea77e0011ff5dc9");
 
         if (!testResult.status.equals("completed")) {
             System.out.println(testResult.toString());
