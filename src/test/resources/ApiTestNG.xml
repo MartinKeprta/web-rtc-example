@@ -15,7 +15,7 @@
         </classes>
     </test>
 
-    <test name="Run tests parametrized">
+    <test name="Test agent information">
         <classes>
             <class name="com.testrtc.api.RetrieveTestAgentInfoExample"/>
         </classes>
