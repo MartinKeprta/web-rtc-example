@@ -14,4 +14,10 @@
             <class name="com.testrtc.api.ParametrizedTestExample"/>
         </classes>
     </test>
+
+    <test name="Run tests parametrized">
+        <classes>
+            <class name="com.testrtc.api.RetrieveTestAgentInfoExample"/>
+        </classes>
+    </test>
 </suite>

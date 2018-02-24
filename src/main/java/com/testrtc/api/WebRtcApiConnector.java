@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.testrtc.api.testAgent.TestAgent;
 import com.testrtc.api.testRun.TestRun;
 import com.testrtc.api.testRunId.TestRunId;
 import io.qameta.allure.Step;
@@ -153,6 +154,22 @@ public final class WebRtcApiConnector {
         }
 
         return null;
+    }
+
+    @Step("Get test agents by agent id")
+    public static TestAgent getTestAgentInformation(String agentId) {
+        HttpResponse<TestAgent> response = null;
+
+        try {
+            response = Unirest.get(baseUrl + "testagents/{agentId}")
+                    .routeParam("agentId", agentId)
+                    .asObject(TestAgent.class);
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+
+
+        return response.getBody();
     }
 
 }
